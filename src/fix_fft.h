@@ -1,5 +1,13 @@
 #ifndef FIXFFT_H
 #define FIXFFT_H
+#include <avr/pgmspace.h>
+
+#if ARDUINO >= 100
+	#include "Arduino.h"
+#else
+	#include "WProgram.h" /* This is where the standard Arduino code lies */
+#endif
+
 
 /* #include <WProgram.h> */
 

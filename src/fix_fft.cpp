@@ -46,7 +46,7 @@
 
 
 
-const prog_int8_t Sinewave[N_WAVE-N_WAVE/4] PROGMEM = {
+const int8_t Sinewave[N_WAVE-N_WAVE/4] PROGMEM = {
 0, 3, 6, 9, 12, 15, 18, 21,
 24, 28, 31, 34, 37, 40, 43, 46,
 48, 51, 54, 57, 60, 63, 65, 68,
