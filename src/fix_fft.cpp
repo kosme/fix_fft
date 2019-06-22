@@ -95,7 +95,7 @@ const int8_t Sinewave[N_WAVE-N_WAVE/4] PROGMEM = {
   optimization suited to a particluar DSP processor.
   Scaling ensures that result remains 16-bit.
 */
-inline char FIX_MPY(char a, char b)
+inline int8_t FIX_MPY(int8_t a, int8_t b)
 {
   
   //Serial.println(a);
@@ -103,7 +103,7 @@ inline char FIX_MPY(char a, char b)
   
   
     /* shift right one less bit (i.e. 15-1) */
-    int c = ((int)a * (int)b) >> 6;
+    int16_t c = ((int16_t)a * (int16_t)b) >> 6;
     /* last bit shifted out = rounding-bit */
     b = c & 0x01;
     /* last shift + rounding bit */
@@ -124,10 +124,10 @@ inline char FIX_MPY(char a, char b)
   RESULT (in-place FFT), with 0 <= n < 2**m; set inverse to
   0 for forward transform (FFT), or 1 for iFFT.
 */
-int fix_fft(char fr[], char fi[], int m, int inverse)
+int16_t fix_fft(int8_t fr[], int8_t fi[], int16_t m, int16_t inverse)
 {
-    int mr, nn, i, j, l, k, istep, n, scale, shift;
-    char qr, qi, tr, ti, wr, wi;
+    int16_t mr, nn, i, j, l, k, istep, n, scale, shift;
+    int8_t qr, qi, tr, ti, wr, wi;
 
     n = 1 << m;
 
@@ -248,10 +248,10 @@ Serial.println("");*/
   that fix_fft "sees" consecutive real samples as alternating
   real and imaginary samples in the complex array.
 */
-int fix_fftr(char f[], int m, int inverse)
+int16_t fix_fftr(int8_t f[], int16_t m, int16_t inverse)
 {
-    int i, N = 1<<(m-1), scale = 0;
-    char tt, *fr=f, *fi=&f[N];
+    int16_t i, N = 1<<(m-1), scale = 0;
+    int8_t tt, *fr=f, *fi=&f[N];
 
     if (inverse)
       scale = fix_fft(fi, fr, m-1, inverse);
